@@ -1,9 +1,3 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package be.mentoringsystems.blockchain.model;
 
 import java.io.Serializable;
@@ -22,7 +16,7 @@ public class Fish implements Serializable {
     private String type;
     private double weight;
     private BigDecimal price;
-    private final String docType = "fish"; // Used to seperate assets in couchdb blockchain database
+    private final String docType = "fish"; // Used to seperate assets in couchdb fabric database
 
     public String getDocType() {
         return docType;

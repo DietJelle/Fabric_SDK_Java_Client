@@ -17,7 +17,7 @@
         <java.version>1.8</java.version>
         <fabric-version>1.4.1</fabric-version>
         <google-api-version>1.8.1</google-api-version>
-         <bootstrap-version>3.3.7-1</bootstrap-version>
+        <bootstrap-version>3.3.7-1</bootstrap-version>
     </properties>
 
     <dependencies>
