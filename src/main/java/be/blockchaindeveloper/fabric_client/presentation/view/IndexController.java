@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package be.mentoringsystems.blockchain.presentation.view;
+package be.blockchaindeveloper.fabric_client.presentation.view;
 
-import be.mentoringsystems.blockchain.model.Fish;
-import be.mentoringsystems.blockchain.model.query.RichQuery;
-import be.mentoringsystems.blockchain.service.FishService;
+import be.blockchaindeveloper.fabric_client.model.Fish;
+import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
+import be.blockchaindeveloper.fabric_client.service.FishService;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;

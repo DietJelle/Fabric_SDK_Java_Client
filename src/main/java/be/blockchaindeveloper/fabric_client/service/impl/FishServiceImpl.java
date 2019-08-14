@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package be.mentoringsystems.blockchain.service.impl;
+package be.blockchaindeveloper.fabric_client.service.impl;
 
-import be.mentoringsystems.blockchain.model.Fish;
-import be.mentoringsystems.blockchain.model.query.RichQuery;
-import be.mentoringsystems.blockchain.persistence.FishDAO;
-import be.mentoringsystems.blockchain.service.FishService;
+import be.blockchaindeveloper.fabric_client.model.Fish;
+import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
+import be.blockchaindeveloper.fabric_client.persistence.FishDAO;
+import be.blockchaindeveloper.fabric_client.service.FishService;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;

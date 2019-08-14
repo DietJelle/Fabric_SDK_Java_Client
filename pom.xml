@@ -8,10 +8,10 @@
         <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.blockchain</groupId>
-    <artifactId>client</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>Fabric_Simple_Crud</name>
+    <groupId>be.blockchaindeveloper</groupId>
+    <artifactId>fabric_client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <properties>
         <java.version>1.8</java.version>

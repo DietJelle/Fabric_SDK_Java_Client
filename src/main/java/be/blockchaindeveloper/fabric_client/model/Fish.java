@@ -1,4 +1,4 @@
-package be.mentoringsystems.blockchain.model;
+package be.blockchaindeveloper.fabric_client.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;

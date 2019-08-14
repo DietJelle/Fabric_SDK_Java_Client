@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package be.mentoringsystems.blockchain.util;
+package be.blockchaindeveloper.fabric_client.util;
 
 /**
  *
  * @author jellediet
  */
-import be.mentoringsystems.blockchain.config.BlockchainNetworkAttributes;
-import be.mentoringsystems.blockchain.model.query.RichQuery;
+import be.blockchaindeveloper.fabric_client.config.BlockchainNetworkAttributes;
+import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.UnsupportedEncodingException;

@@ -1,6 +1,6 @@
-package be.mentoringsystems.blockchain.config;
+package be.blockchaindeveloper.fabric_client.config;
 
-import be.mentoringsystems.blockchain.user.FabricUserContext;
+import be.blockchaindeveloper.fabric_client.user.FabricUserContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;

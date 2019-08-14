@@ -1,4 +1,4 @@
-package be.mentoringsystems.blockchain.config;
+package be.blockchaindeveloper.fabric_client.config;
 
 public class BlockchainNetworkAttributes {
 

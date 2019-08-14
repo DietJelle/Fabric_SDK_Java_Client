@@ -1,4 +1,4 @@
-package be.mentoringsystems.blockchain;
+package be.blockchaindeveloper.fabric_client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

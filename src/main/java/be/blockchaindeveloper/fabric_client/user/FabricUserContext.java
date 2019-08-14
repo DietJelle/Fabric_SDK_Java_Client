@@ -1,4 +1,4 @@
-package be.mentoringsystems.blockchain.user;
+package be.blockchaindeveloper.fabric_client.user;
 
 /**
  *

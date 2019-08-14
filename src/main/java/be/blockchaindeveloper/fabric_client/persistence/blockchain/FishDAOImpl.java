@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package be.mentoringsystems.blockchain.persistence.blockchain;
+package be.blockchaindeveloper.fabric_client.persistence.blockchain;
 
-import be.mentoringsystems.blockchain.model.Fish;
-import be.mentoringsystems.blockchain.model.query.RichQuery;
-import be.mentoringsystems.blockchain.persistence.FishDAO;
-import be.mentoringsystems.blockchain.util.ChaincodeExecuter;
+import be.blockchaindeveloper.fabric_client.model.Fish;
+import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
+import be.blockchaindeveloper.fabric_client.persistence.FishDAO;
+import be.blockchaindeveloper.fabric_client.util.ChaincodeExecuter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
