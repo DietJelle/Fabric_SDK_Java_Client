@@ -14,7 +14,7 @@ public class BlockchainNetworkAttributes {
 
     public static final String CHANNEL_1_NAME = "mychannel";
 
-    public static final String CHAINCODE_1_NAME = "MerkeChaincode";
+    public static final String CHAINCODE_1_NAME = "NodeChaincodeExample";
 
     public static final String CHAINCODE_1_VERSION = "0.1";
 
