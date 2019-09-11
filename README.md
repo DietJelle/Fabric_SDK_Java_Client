@@ -29,7 +29,7 @@ A step by step series of examples that tell you how to get a development env run
 
 ### Running
 
-Run the project on a server (for example on tomcat), it will deploy to 8081/blockchain
+Run the main file (BlockchainApplication.java), it will deploy to 8081/blockchain on a tomcat server
 
 ### Rich querying
 
