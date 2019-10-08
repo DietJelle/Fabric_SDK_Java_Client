@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Fish overview</title>
+    <th:block th:include="layout/header"></th:block>
+</head>
+<body>
+<div class="container">
+    <div th:if="${#lists.isEmpty(fishes)}"> No fish found!</div>
+    <div th:if="${not #lists.isEmpty(fishes)}">
+        <h2>Fish</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Type</th>
+                <th>Weight</th>
+                <th>Price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+                <th>History</th>
+            </tr>
+            <tr th:each="fish : ${fishes}">
+                <td th:text="${fish.type}">Salmon</td>
+                <td th:text="${fish.weight}">2</td>
+                <td th:text="${fish.price}">3</td>
+                <td><a th:href="${'/blockchain/products/edit?id=' + fish.id}" class="btn btn-default">Edit</a></td>
+                <td><a th:href="${'/blockchain/products/delete?id=' + fish.id}" class="btn btn-danger">Delete</a></td>
+                 <td><a th:href="${'/blockchain/products/history?id=' + fish.id}" class="btn btn-default">View</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

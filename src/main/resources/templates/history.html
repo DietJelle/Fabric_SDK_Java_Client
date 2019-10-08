@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Fish overview</title>
+    <th:block th:include="layout/header"></th:block>
+</head>
+<body>
+<div class="container">
+    <div th:if="${#lists.isEmpty(history)}"> No transactions found!</div>
+    <div th:if="${not #lists.isEmpty(history)}">
+        <h2>Fish</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Type</th>
+                <th>Weight</th>
+                <th>Price</th>
+                <th>Transaction ID</th>
+                <th>Time</th>
+                <th>Creator MSP</th>
+                <th>Creator Signature</th>
+            </tr>
+            <tr th:each="history : ${history}">
+                <td th:text="${history.asset.type}">Salmon</td>
+                <td th:text="${history.asset.weight}">2</td>
+                <td th:text="${history.asset.price}">3</td>
+                <td th:text="${history.transactionId}">123456789</td>
+                <td th:text="${#dates.format(new java.util.Date(history.timeStamp), 'dd/MM/yyyy - HH:mm')}">123456789</td>
+                <td th:text="${history.creatorMspId}">Org1MSP</td>
+                <td th:text="${history.creatorId}">--Certificate--</td>
+
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
