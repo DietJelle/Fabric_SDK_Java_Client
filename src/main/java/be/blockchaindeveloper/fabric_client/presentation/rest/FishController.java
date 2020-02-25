@@ -1,6 +1,7 @@
 package be.blockchaindeveloper.fabric_client.presentation.rest;
 
 import be.blockchaindeveloper.fabric_client.model.Fish;
+import be.blockchaindeveloper.fabric_client.model.FishPrivateData;
 import be.blockchaindeveloper.fabric_client.model.TransactionHistory;
 import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
 import be.blockchaindeveloper.fabric_client.service.FishService;
@@ -9,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,14 +42,22 @@ public class FishController {
 
     //Saves a fish using id as key
     @RequestMapping("/save")
-    Fish saveFish(@RequestParam(required = false) String type, @RequestParam(required = false) Double weight, @RequestParam(required = false) BigDecimal price) {
+    Fish saveFish(@RequestParam(required = false) UUID id, @RequestParam(required = false) String type, @RequestParam(required = false) Double weight, @RequestParam(required = false) BigDecimal price, @RequestParam(required = false, value = "fishPrivateData.owner") String owner, @RequestParam(required = false, value = "fishPrivateData.mercuryContent") Double mercuryContent) {
+        Logger.getLogger(FishController.class.getName()).log(Level.INFO, "Owner {0}", owner);
 
         Fish fish = new Fish();
-        fish.setType(type);
+        if (id != null) {
+            fish = fishService.getById(id);
+        }
         fish.setPrice(price);
         if (weight != null) {
             fish.setWeight(weight);
         }
+        fish.setType(type);
+        FishPrivateData privateData = new FishPrivateData();
+        privateData.setMercuryContent(mercuryContent);
+        privateData.setOwner(owner);
+        fish.setFishPrivateData(privateData);
         fishService.save(fish);
         return fish;
     }

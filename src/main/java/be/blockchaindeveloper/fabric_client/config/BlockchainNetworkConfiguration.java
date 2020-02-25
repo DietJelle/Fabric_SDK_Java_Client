@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hyperledger.fabric.sdk.Channel;
@@ -67,6 +69,10 @@ public class BlockchainNetworkConfiguration {
         FabricUserContext adminUserContext = new FabricUserContext();
         adminUserContext.setName(BlockchainNetworkAttributes.ADMIN_NAME); // admin username
         adminUserContext.setAffiliation(BlockchainNetworkAttributes.ORG1_NAME); // affiliation
+        Set<String> roles = new HashSet<>();
+        roles.add("member");
+        roles.add("admin");
+        adminUserContext.setRoles(roles);
         adminUserContext.setMspId(BlockchainNetworkAttributes.ORG1_MSP); // org1 mspid
         Enrollment adminEnrollment = hfcaClient.enroll(BlockchainNetworkAttributes.ADMIN_NAME, BlockchainNetworkAttributes.ADMIN_PASSWORD); //pass admin username and password, adminpw is the default for fabric
         adminUserContext.setEnrollment(adminEnrollment);

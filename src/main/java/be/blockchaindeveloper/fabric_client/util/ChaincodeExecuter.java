@@ -5,6 +5,8 @@ package be.blockchaindeveloper.fabric_client.util;
  * @author jellediet
  */
 import be.blockchaindeveloper.fabric_client.config.BlockchainNetworkAttributes;
+import be.blockchaindeveloper.fabric_client.model.Fish;
+import be.blockchaindeveloper.fabric_client.model.FishPrivateData;
 import be.blockchaindeveloper.fabric_client.model.TransactionHistory;
 import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -14,8 +16,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
@@ -50,7 +54,7 @@ public class ChaincodeExecuter {
     @Autowired
     ObjectMapper objectMapper;
 
-    public String executeTransaction(boolean invoke, String func, String... args) throws InvalidArgumentException, ProposalException, UnsupportedEncodingException, InterruptedException, ExecutionException, TimeoutException {
+    public String executeTransaction(boolean invoke, String func, String[] args, final String privateDataJson) throws InvalidArgumentException, ProposalException, UnsupportedEncodingException, InterruptedException, ExecutionException, TimeoutException {
 
         ChaincodeID.Builder chaincodeIDBuilder = ChaincodeID.newBuilder()
                 .setName(BlockchainNetworkAttributes.CHAINCODE_1_NAME)
@@ -64,6 +68,12 @@ public class ChaincodeExecuter {
         transactionProposalRequest.setFcn(func);
         transactionProposalRequest.setArgs(args);
         transactionProposalRequest.setProposalWaitTime(waitTime);
+
+        if (privateDataJson != null) {
+            Map<String, byte[]> transientData = new HashMap<>();
+            transientData.put("FishPrivateData", privateDataJson.getBytes("UTF-8"));
+            transactionProposalRequest.setTransientMap(transientData);
+        }
         String payload = "";
 
         List<ProposalResponse> successful = new LinkedList();
@@ -112,7 +122,25 @@ public class ChaincodeExecuter {
         String result = "";
         String[] args = {key, json};
         try {
-            result = executeTransaction(true, "set", args);
+            result = executeTransaction(true, "set", args, null);
+        } catch (InvalidArgumentException | ProposalException | UnsupportedEncodingException | InterruptedException | ExecutionException | TimeoutException ex) {
+            Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return result;
+    }
+
+    public String saveFish(String key, Fish fish, FishPrivateData fishPrivateData) {
+
+        String result = "";
+        String[] args = {key, fish.toJSONString()};
+        String privateData = null;
+        if (fishPrivateData != null) {
+            Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.INFO, "Saving private data:" + fishPrivateData.getOwner());
+            privateData = fishPrivateData.toJSONString();
+        }
+        try {
+            result = executeTransaction(true, "set", args, privateData);
         } catch (InvalidArgumentException | ProposalException | UnsupportedEncodingException | InterruptedException | ExecutionException | TimeoutException ex) {
             Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -122,8 +150,9 @@ public class ChaincodeExecuter {
 
     public String getObjectByKey(String key) {
         String result = "";
+        String[] args = {key};
         try {
-            result = executeTransaction(false, "get", key);
+            result = executeTransaction(false, "get", args, null);
         } catch (InvalidArgumentException | ProposalException | UnsupportedEncodingException | InterruptedException | ExecutionException | TimeoutException ex) {
             Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -133,8 +162,9 @@ public class ChaincodeExecuter {
 
     public String deleteObject(String key) {
         String result = "";
+        String[] args = {key};
         try {
-            result = executeTransaction(true, "delete", key);
+            result = executeTransaction(true, "delete", args, null);
         } catch (InvalidArgumentException | ProposalException | UnsupportedEncodingException | InterruptedException | ExecutionException | TimeoutException ex) {
             Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -146,7 +176,7 @@ public class ChaincodeExecuter {
         String result = "";
         try {
             String[] args = {objectMapper.writeValueAsString(query)};
-            result = executeTransaction(false, "query", args);
+            result = executeTransaction(false, "query", args, null);
         } catch (InvalidArgumentException | ProposalException | UnsupportedEncodingException | InterruptedException | ExecutionException | TimeoutException | JsonProcessingException ex) {
             Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -155,8 +185,9 @@ public class ChaincodeExecuter {
 
     public List<TransactionHistory> getHistory(String key) {
         String result = "";
+        String[] args = {key};
         try {
-            result = executeTransaction(false, "getHistory", key);
+            result = executeTransaction(false, "getHistory", args, null);
         } catch (InvalidArgumentException | ProposalException | UnsupportedEncodingException | InterruptedException | ExecutionException | TimeoutException ex) {
             Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.SEVERE, null, ex);
         }

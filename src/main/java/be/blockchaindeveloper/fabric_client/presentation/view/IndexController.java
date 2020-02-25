@@ -1,6 +1,7 @@
 package be.blockchaindeveloper.fabric_client.presentation.view;
 
 import be.blockchaindeveloper.fabric_client.model.Fish;
+import be.blockchaindeveloper.fabric_client.model.FishPrivateData;
 import be.blockchaindeveloper.fabric_client.model.TransactionHistory;
 import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
 import be.blockchaindeveloper.fabric_client.service.FishService;
@@ -91,7 +92,8 @@ public class IndexController {
     }
 
     @RequestMapping("/products/save")
-    public String saveFish(@RequestParam UUID id, @RequestParam String type, @RequestParam BigDecimal price, @RequestParam Double weight) {
+    public String saveFish(@RequestParam UUID id, @RequestParam String type, @RequestParam BigDecimal price, @RequestParam Double weight,
+            @RequestParam(required = false, value = "fishPrivateData.owner") String owner, @RequestParam(required = false, value = "fishPrivateData.mercuryContent") Double mercuryContent) {
         Fish fish;
         if (id == null) {
             fish = new Fish();
@@ -104,6 +106,11 @@ public class IndexController {
         fish.setPrice(price);
 
         fish.setWeight(weight);
+
+        FishPrivateData privateData = new FishPrivateData();
+        privateData.setMercuryContent(mercuryContent);
+        privateData.setOwner(owner);
+        fish.setFishPrivateData(privateData);
 
         fishService.save(fish);
 

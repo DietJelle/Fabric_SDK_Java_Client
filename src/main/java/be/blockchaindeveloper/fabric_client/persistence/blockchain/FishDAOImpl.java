@@ -6,11 +6,11 @@
 package be.blockchaindeveloper.fabric_client.persistence.blockchain;
 
 import be.blockchaindeveloper.fabric_client.model.Fish;
+import be.blockchaindeveloper.fabric_client.model.FishPrivateData;
 import be.blockchaindeveloper.fabric_client.model.TransactionHistory;
 import be.blockchaindeveloper.fabric_client.model.query.RichQuery;
 import be.blockchaindeveloper.fabric_client.persistence.FishDAO;
 import be.blockchaindeveloper.fabric_client.util.ChaincodeExecuter;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -65,14 +65,11 @@ public class FishDAOImpl implements FishDAO {
         if (fish.getId() == null) {
             fish.setId(UUID.randomUUID());
         }
-        String json = "";
-        try {
-            json = objectMapper.writeValueAsString(fish);
-        } catch (JsonProcessingException ex) {
-            Logger.getLogger(FishDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        FishPrivateData privateData = fish.getFishPrivateData();
+        //Prevent saving of private data in blockchain
+        fish.setFishPrivateData(null);
 
-        chaincodeExecuter.saveObject(String.valueOf(fish.getId()), json);
+        chaincodeExecuter.saveFish(String.valueOf(fish.getId()), fish, privateData);
     }
 
     @Override
