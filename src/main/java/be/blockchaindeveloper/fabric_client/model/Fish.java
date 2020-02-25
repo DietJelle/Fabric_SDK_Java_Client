@@ -25,6 +25,7 @@ public class Fish implements Serializable {
     private double weight;
     private BigDecimal price;
     private FishPrivateData fishPrivateData;
+    private String privateDataHash;
     private final String docType = "fish"; // Used to seperate assets in couchdb fabric database
 
     public String getDocType() {
@@ -79,6 +80,14 @@ public class Fish implements Serializable {
             Logger.getLogger(Fish.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public String getPrivateDataHash() {
+        return privateDataHash;
+    }
+
+    public void setPrivateDataHash(String privateDataHash) {
+        this.privateDataHash = privateDataHash;
     }
 
     public static Fish fromJSONString(String json) {
