@@ -29,7 +29,7 @@ import org.springframework.core.io.Resource;
 @Configuration
 public class BlockchainNetworkConfiguration {
 
-    @Value("classpath:connectiondetails/connection-profile.json")
+    @Value("classpath:connectiondetails/connection-profile-cloud.json")
     private transient Resource connectionFile;
 
     @Bean

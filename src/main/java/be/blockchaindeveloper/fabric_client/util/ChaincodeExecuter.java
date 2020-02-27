@@ -102,11 +102,12 @@ public class ChaincodeExecuter {
             // Java sdk tries all orderers to send transaction, so don't worry about one orderer gone.
             try {
                 CompletableFuture<TransactionEvent> future = channel.sendTransaction(successful);
+                TransactionEvent transactionEvent = future.get();
+                future.complete(transactionEvent);
                 if (future.isDone()) {
-                    TransactionEvent transactionEvent = future.get();
                     Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.INFO, "Orderer response: txid: " + transactionEvent.getTransactionID());
                     Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.INFO, "Orderer response: block number: " + transactionEvent.getBlockEvent().getBlockNumber());
-                    return null;
+                    return payload;
                 }
             } catch (InterruptedException | ExecutionException ex) {
                 Logger.getLogger(ChaincodeExecuter.class.getName()).log(Level.SEVERE, "Orderer exception happened: " + ex);
