@@ -42,7 +42,7 @@ import org.springframework.stereotype.Component;
 public class ChaincodeExecuter {
 
     private ChaincodeID ccId;
-    private final long waitTime = 6000; //Milliseconds
+    private final long waitTime = 20000; //Milliseconds
 
     @Autowired
     @Qualifier("channel1")

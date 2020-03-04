@@ -122,7 +122,7 @@ public class FishDAOImpl implements FishDAO {
         List<TransactionHistory> list = chaincodeExecuter.getHistory(key);
         list.forEach((history) -> {
             try {
-                String fishString = (String) history.getAsset();
+                String fishString = objectMapper.writeValueAsString(history.getAsset());
                 Fish fish = objectMapper.readValue(fishString, Fish.class);
                 history.setAsset(fish);
                 BlockInfo info = channel.queryBlockByTransactionID(history.getTransactionId());
